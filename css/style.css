@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;700&display=swap");
+
+img {
+    width: 100%; }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  
+  body {
+    background-color: #969696;
+    background-image: url(../img/fondo-2.webp);
+    width: 100%; }
+  
+  p {
+    color: white; }
+  
+  a {
+    color: black;
+    text-decoration: none; }
+  
+  a:active {
+    color: black; }
+  
+  a:hover {
+    color: black; }
+  
+  a:visited {
+    color: #000; }
+  
+  h1, h2, h3, footer {
+    color: white; }
+  
+/*------HEADER----*/
+    header {
+        background: linear-gradient(30deg, #dfdfdf 0%, #9d9d9d 24%, #7c7c80 49%, #303031 79%, black 100%);
+        /*----------NAV-----------------*/ }
+        header .header__section1--img-1 {
+          box-shadow: 2px 2px 4px black; }
+        header .navbar-nav {
+          font-size: 1rem; }
+          header .navbar-nav .nav-link {
+            transition: 0.5s; }
+            header .navbar-nav .nav-link:hover {
+              transform: scale(1.05); }
+        header .active {
+          border: 2px solid black;
+          box-shadow: 1px 1px 4px white;
+          transform: scale(1.05); }
+
+
+ /*-----PRODUCTOS-----*/  
+ 
+#section1-catalogo{
+    margin: 0rem 5.5rem;}
+
+.div-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: .2rem; }
+
+section div article div img {
+    width: 100%;
+    height: auto; }
+      
+.div-article__active:hover {
+    transition: .5s;
+    transform: scale(1.03); }
+      
+/*------------imagenes de articuloes-----------------*/
+.article1__div1-img, .article2__div1-img, .article3__div1-img, .article4__div1-img {
+    box-shadow: 2px 2px 4px black; }
+      
+/*------------SECTION ARTICLE------------------*/
+.section1-catalogo {
+  max-width: 1200px; }
+  .section1-catalogo__article {
+    flex: 1 1 250px; }
+    .section1-catalogo__article-1--div2, .section1-catalogo__article-2--div2, .section1-catalogo__article-3--div2, .section1-catalogo__article-4--div2 {
+      background-color: #cdcccc;
+      box-shadow: 2px 2px 4px black; }
+
+/*-----medios de pago-----*/
+.section3 {
+  margin-top: 1.5rem; }
+  .section3__content, .section3__content--article {
+    background-color: #ededed; }
+    .section3__content--article {
+      width: 20%;
+      height: auto; }
+      .section3__content--article--img {
+        max-width: 50px;
+        box-shadow: 2px 2px 4px black; }
+
+/*----FOOTER-----*/
+
+.footer {
+  margin: .5rem .75rem;
+  background: linear-gradient(180deg, #dfdfdf 5%, #8a8989 46%, #58585c 80%); }
+  .footer__icon-instagram, .footer__icon-whatsapp {
+    width: 40px;
+    height: 40px; }
+  .footer__icon-facebook, .footer__icon-twitter {
+    width: 45px;
+    height: 45px; }
