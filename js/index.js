@@ -63,6 +63,7 @@ function agregarProductos(){
     if (item != ""){
         let respuesta = confirm ("Finalizar compra de:" + item)
         sumarProductos()
+
         if (respuesta){
             alert("Muchas Gracias por confiar en Imitation of Weapon!!")
             alert("Hasta la Proxima!!")
@@ -91,8 +92,7 @@ function confirmarProducto(codigo){
 
         default:
             producto = false;
-
-    } 
+        } 
 
     return producto
 }
@@ -111,7 +111,13 @@ function sumarProductos(){
     alert("Por seleccionar 4 productos o mas, se le aplico un descuento de:" +" "+"$"+descuento)
 } 
 
+//funcion para sumar envio
 
-//lamando a la funcion en el navegador
+function solicitarEnvio(){
+    let costoEnvio = 500
+
+}
+
+//llamando a la funcion en el navegador
 pedirDatos();
 
