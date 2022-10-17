@@ -1,9 +1,6 @@
 //mi proyecto esta orientado a darle vida al carrito de la pagina que cree en el curso de desarrolo web//
 //para esto voy a comenzar con lo basico visto en clase que es logearse, agregar productos y posteriormente realizar una suma de los procustos//
 
-//datos para el login del usuario//
-const user = "nicolas";
-const pass = "123456";
 
 //empezando a solicitar datos//
 function pedirDatos(){
@@ -28,6 +25,10 @@ function pedirDatos(){
 
 //funciones en caso de que el usuario se logee correctamente//
 
+//datos para el login del usuario//
+const user = "nicolas";
+const pass = "123456";
+
 
 //funcion para validar datos
 function validarDatos(usuario, password){
@@ -42,6 +43,7 @@ function validarDatos(usuario, password){
 
 
 //funcion para agregar productos//
+
 function agregarProductos(){
     let item = "";
     let finCarrito = false;
