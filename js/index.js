@@ -4,23 +4,52 @@
 
 //funcion constructora y agregando base de datos local de los productos para iteraccionar con ellos
 class producto {
-    constructor (producto, nombre, tipo, calibre, capacidad, precio){
+    constructor (producto, nombre, tipo, calibre, capacidad, precio, img){
         this.producto = producto;
         this.nombre = nombre.toUpperCase();
         this.tipo = tipo;
         this.calibre = calibre;
         this.capacidad = capacidad;
         this.precio = parseFloat(precio);
+        this.img = img;
     }
 }
 
 const catalogo = [];
-catalogo.push(new producto(1, "HK-USP", "semiautomatica", "9mm", "16 mun.", 3500));
-catalogo.push(new producto(2, "DESERT EAGLE", "semiautomatica", ".45 mm", "7 mun", 5500));
-catalogo.push(new producto(3, "MAGNUM .44", "semiautomatica", ".44 mm", "6 mun. (Tambor)", 5900));
-catalogo.push(new producto(4, "GLOCK 17", "semiautomatica", "9mm", "17 mun.", 4800));
+catalogo.push(new producto(1, "HK-USP", "Semiautomatica", "9mm", "16 mun.", 3500, "HK-USP.webp"));
+catalogo.push(new producto(2, "DESERT EAGLE", "Semiautomatica", ".45 mm", "7 mun", 5500, "DESERT-EAGLE.webp"));
+catalogo.push(new producto(3, "MAGNUM .44", "Semiautomatica", ".44 mm", "6 mun. (Tambor)", 5900, "MAGNUM-44.webp"));
+catalogo.push(new producto(4, "GLOCK 17", "Semiautomatica", "9mm", "17 mun.", 4800, "GLOCK-17.webp"));
 
 console.log(catalogo); 
+
+// agregando productos en cards con innerHTML
+const divArticle = document.getElementById ('divArticle');
+
+catalogo.forEach(producto => {
+    let article = document.createElement('article');
+    article.classList.add('section1-catalogo__article', 'd-flex', 'flex-column', 'm-2');
+
+    article.innerHTML = 
+                       `<div class="section1-catalogo__article-1--div1 div-article__active">
+                            <img src="./img/${producto.img}" alt="HK-USP" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3">
+                        </div>
+                        <div class="section1-catalogo__article-1--div2 d-flex flex-column justify-content-center border border-dark rounded-3 pb-2">
+                            <p class="section1-catalogo__article-1--div2--text">
+                                <h4 class="section1-catalogo__article-1--div2--text--h4 text-center mx-0 my-2">${producto.nombre}</h4>
+                                <ul>
+                                    <li><b>PRODUCTO N° ${producto.producto}</b></li>
+                                    <li>${producto.tipo}</li>
+                                    <li>Calibre ${producto.calibre}</li>
+                                    <li>Cargador ${producto.capacidad}</li>
+                                    <li><b>$ ${producto.precio}</b></li>
+                                    <button type="button" data-id="${producto.producto}" class="btn btn-secondary">AGREGAR</button>
+                                </ul>
+                            </p>
+                        </div>`
+
+    divArticle.appendChild(article);                    
+})
 
 //funciones en caso de que el usuario se logee correctamente//
 
@@ -41,9 +70,64 @@ function validarDatos(usuario, password){
     }
 }
 
-
 //empezando a solicitar datos//
 function pedirDatos(){
+    let usuario = prompt("Ingrese el Usuario");
+    let password = prompt("Ingrese la Contraseña");
+
+    if (validarDatos(usuario, password)){
+        alert("Bienvenido a Imitation of Weapons!!");
+    }else{
+        alert("Los datos ingresados no son correctos, vuelve a intentarlo");
+    }
+}
+
+divArticle.addEventListener('click', e=> {
+    addCarrito(e)
+})
+
+
+const addCarrito = e => {
+    //console.log(e.target)
+    //console.log(e.target.classList.contains('btn'))
+    if(e.target.classList.contains('btn')){
+        setCarrito (e.target.parentElement)
+    }
+    e.stopPropagation()
+}
+
+const setCarrito = objeto =>{
+    console.log(objeto);
+    const prod = {
+        porducto: objeto.querySelector('button').dataset.id,
+    }
+    alert("agregaste un producto")
+    console.log(prod)
+    
+}
+
+localStorage.setItem('productos', addCarrito)
+
+
+
+
+
+
+/*document.addEventListener('DOMContentLoaded', () => {
+
+    carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
+
+})/*
+
+
+
+
+
+
+
+
+//empezando a solicitar datos//
+/*--function pedirDatos(){
     let usuario = prompt("Ingrese el Usuario");
     let password = prompt("Ingrese la Contraseña");
 
@@ -164,4 +248,4 @@ function sumarProductos(){
 }
 
 //llamando a la funcion en el navegador//
-pedirDatos();
+pedirDatos();--*/
