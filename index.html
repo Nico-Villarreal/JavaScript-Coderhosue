@@ -50,8 +50,10 @@
                     <form role="search" class="d-flex gap-2 justify-content-center">
                         <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">
                         <div class="d-flex gap-3">
-                            <a href="https://www.google.com/" target="_blank" ><img src="./img/busqueda.webp" alt="icono-busqueda" class="border-1 border-white rounded-2 bg-white border-secondary"></a>
-                            <a href="./carrito.html"><img src="./img/carrito.webp" alt="carito" class="border-1 border-black rounded-2 bg-white border-secondary"></a>
+                            <button id="boton-carrito" class="d-flex flex-row p-1 rounded-2">
+                                <img src="./img/carrito.webp" alt="carito" class="border-1 border-black rounded-2 bg-white border-secondary w-75">
+                                <span id="contadorCarrito" class="me-3 p-2 fs-5 fw-bold">0</span>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -71,7 +73,17 @@
         </div>
 
     </section>
+ 
+  <div class="modal-contenedor">
+        <div class="modal-carrito m-5 bg-secondary justify-content-end rounded-2 mt-3">
+            <h3 class="text-center">Carrito</h3>
+            <div id="container-Carrito">
 
+            </div>
+            <p class="precioProducto text-center bg-secondary">Precio total: $<span id="precioTotal">0</span></p>
+            <button id="vaciar-carrito" class="boton-agregar m-3 p-2 rounded-2 ">Vaciar carrito</button>
+        </div>
+    </div>
 <!-------------payment-methods------------>
     <section id="section3-medios-de-pagos" class="section3 d-flex flex-wrap align-items-center mx-4 my-5">
         <h2 class="section3__h3 text-center p-4 w-100">MEDIOS DE PAGOS</h2>
@@ -140,3 +152,4 @@
     <script src="./js/index.js"></script>
 </body>
 </html>
+
