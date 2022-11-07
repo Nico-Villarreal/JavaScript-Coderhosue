@@ -4,8 +4,8 @@
 
 //funcion constructora y agregando base de datos local de los productos para iteraccionar con ellos
 class producto {
-    constructor (producto, nombre, tipo, calibre, capacidad, precio, img, cantidad){
-        this.id = producto;
+    constructor (id, nombre, tipo, calibre, capacidad, precio, img, cantidad){
+        this.id = id;
         this.nombre = nombre.toUpperCase();
         this.tipo = tipo;
         this.calibre = calibre;
@@ -99,7 +99,6 @@ const agregarCarrito = (prodId) => {
         actualizarCarrito()
 }
 
-// eliminando productos
 const eliminarProducto =  (prodId) => {
     const item = carrito.find((producto) => producto.id === prodId)
     
@@ -123,14 +122,14 @@ const actualizarCarrito = () => {
 
     carrito.forEach((producto) => {
         const div = document.createElement('div')
-        div.className = (`productoEnCarrito bg-secondary text-white m-5 p-3 d-flex gap-5 justify-content-center rounded-2`)
+        div.className = (`productoEnCarrito text-white mt-5 rounded-2`)
         const {id, nombre, precio, cantidad, img} = producto
         div.innerHTML = `
                         <div> 
                             <img src="./img/${img}" alt="HK-USP" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3 w-75">
                         </div>
-                        <div clas="w-25"> 
-                            <p class="border border-light border-3 p-2 rounded-2"> ${nombre}</p>
+                        <div> 
+                            <p class="border border-light border-3 p-2 rounded-2 mt-2"> ${nombre}</p>
                             <p class="border border-light border-3 p-2 rounded-2"> Precio: $ ${precio}</p>
                             <p class="border border-light border-3 p-2 rounded-2"> Cantidad: <span id="cantidad"> ${cantidad}</p>
                             <button onclick = "eliminarProducto(${id})" class="boton-eliminar p-2 rounded-2">Eliminar producto</button>

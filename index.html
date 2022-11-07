@@ -49,13 +49,13 @@
                     </ul>
                     <form role="search" class="d-flex gap-2 justify-content-center">
                         <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">
-                        <div class="d-flex gap-3">
-                            <button id="boton-carrito" class="d-flex flex-row p-1 rounded-2">
-                                <img src="./img/carrito.webp" alt="carito" class="border-1 border-black rounded-2 bg-white border-secondary w-75">
-                                <span id="contadorCarrito" class="me-3 p-2 fs-5 fw-bold">0</span>
-                            </button>
-                        </div>
                     </form>
+                    <div class="d-flex gap-3">
+                        <button id="boton-carrito" class="btn btn-secondary d-flex flex-row p-1" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <img src="./img/carrito.webp" alt="carito" class="border-1 border-black rounded-2 bg-white border-secondary w-75">
+                            <span id="contadorCarrito" class="me-3 p-2 fs-5 fw-bold">0</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -73,17 +73,28 @@
         </div>
 
     </section>
- 
-  <div class="modal-contenedor">
-        <div class="modal-carrito m-5 bg-secondary justify-content-end rounded-2 mt-3">
-            <h3 class="text-center">Carrito</h3>
-            <div id="container-Carrito">
 
+<!-------------modal carrito----------->
+  <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content bg-secondary">
+                <div class="modal-carrito m-5 bg-secondary rounded-2 mt-3 justify-content-center">
+                    <div class="modal-header">
+                        <h3 class="text-center">Carrito</h3>
+                        <button type="button" class="btn-close border border-dark" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div id="container-Carrito" class="mt-5 gap-5">
+
+                    </div>
+                    <p class="precioProducto text-center bg-secondary">Precio total: $<span id="precioTotal">0</span></p>
+                    <div class="modal-footer">
+                        <button id="vaciar-carrito" class="boton-agregar m-3 p-2 rounded-2 ">Vaciar carrito</button>
+                    </div>
+                </div>
             </div>
-            <p class="precioProducto text-center bg-secondary">Precio total: $<span id="precioTotal">0</span></p>
-            <button id="vaciar-carrito" class="boton-agregar m-3 p-2 rounded-2 ">Vaciar carrito</button>
         </div>
     </div>
+  
 <!-------------payment-methods------------>
     <section id="section3-medios-de-pagos" class="section3 d-flex flex-wrap align-items-center mx-4 my-5">
         <h2 class="section3__h3 text-center p-4 w-100">MEDIOS DE PAGOS</h2>
