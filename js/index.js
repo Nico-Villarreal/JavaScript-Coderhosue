@@ -122,7 +122,7 @@ const actualizarCarrito = () => {
 
     carrito.forEach((producto) => {
         const div = document.createElement('div')
-        div.className = (`productoEnCarrito text-white mt-5 rounded-2`)
+        div.className = (`productoEnCarrito text-white mt-5 rounded-2 d-flex`)
         const {id, nombre, precio, cantidad, img} = producto
         div.innerHTML = `
                         <div> 
