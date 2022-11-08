@@ -4,7 +4,7 @@
 
 //funcion constructora y agregando base de datos local de los productos para iteraccionar con ellos
 class producto {
-    constructor (id, nombre, tipo, calibre, capacidad, precio, img, cantidad){
+    constructor (id, nombre, tipo, calibre, capacidad, precio, img, cantidad, categoria){
         this.id = id;
         this.nombre = nombre.toUpperCase();
         this.tipo = tipo;
@@ -13,14 +13,15 @@ class producto {
         this.precio = parseFloat(precio);
         this.img = img;
         this.cantidad = cantidad
+        this.categoria = categoria
     }
 }
 
 const catalogo = [];
-catalogo.push(new producto(1, "HK-USP", "Semiautomatica", "9mm", "16 mun.", 3500, "HK-USP.webp", 1));
-catalogo.push(new producto(2, "DESERT EAGLE", "Semiautomatica", ".45 mm", "7 mun", 5500, "DESERT-EAGLE.webp", 1));
-catalogo.push(new producto(3, "MAGNUM .44", "Semiautomatica", ".44 mm", "6 mun. (Tambor)", 5900, "MAGNUM-44.webp", 1));
-catalogo.push(new producto(4, "GLOCK 17", "Semiautomatica", "9mm", "17 mun.", 4800, "GLOCK-17.webp", 1));
+catalogo.push(new producto(1, "HK-USP", "Semiautomatica", "9mm", "16 mun.", 3500, "HK-USP.webp", 1, "Pistolas y Revolveres"));
+catalogo.push(new producto(2, "DESERT EAGLE", "Semiautomatica", ".45 mm", "7 mun", 5500, "DESERT-EAGLE.webp", 1, "Pistolas y Revolveres"));
+catalogo.push(new producto(3, "MAGNUM .44", "Semiautomatica", ".44 mm", "6 mun. (Tambor)", 5900, "MAGNUM-44.webp", 1, "Pistolas y Revolveres"));
+catalogo.push(new producto(4, "GLOCK 17", "Semiautomatica", "9mm", "17 mun.", 4800, "GLOCK-17.webp", 1, "Pistolas y Revolveres"));
 
 
 
@@ -30,17 +31,15 @@ const containerCarrito = document.getElementById('container-Carrito');
 const botonVaciar = document.getElementById('vaciar-carrito')
 const contadorCarrito = document.getElementById('contadorCarrito')
 const precioTotal = document.getElementById('precioTotal')
-
+const finalizarCompra = document.getElementById('finalizar-compra')
 
 let carrito = []
 
 //iniciando DOM en el proyecto
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito') || [])
-        actualizarCarrito()
-    }
+    carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    actualizarCarrito();
 })
 
 
@@ -76,7 +75,7 @@ catalogo.forEach(producto => {
     const boton = document.getElementById(`agregar${id}`)
 
     boton.addEventListener('click', () => {
-        agregarCarrito(id)
+        agregarCarrito(id);
     })
     
 })
@@ -84,35 +83,26 @@ catalogo.forEach(producto => {
 
 //let para agregar productos con el tag "button" al carrito
 const agregarCarrito = (prodId) => {
-    const existe = carrito.some((producto) => producto.id === prodId)
+    const existe = carrito.some((producto) => producto.id === prodId);
         
         if(existe){
             const prod = carrito.map(producto => {
                 if(producto.id === prodId){
-                    producto.cantidad++
+                    producto.cantidad++;
                 }
             })
         }else{
-            const item = catalogo.find((producto) => producto.id === prodId)
-            carrito.push(item)    
+            const item = catalogo.find((producto) => producto.id === prodId);
+            carrito.push(item);    
         }
-        actualizarCarrito()
-}
-
-const eliminarProducto =  (prodId) => {
-    const item = carrito.find((producto) => producto.id === prodId)
-    
-    const indice = carrito.indexOf(item)
-    carrito.splice(indice, 1)
-
-    actualizarCarrito()
+        actualizarCarrito();
 }
 
 //boton de vaciar productos del carrito 
  
 botonVaciar.addEventListener ('click', () => {
-    carrito.length = 0
-    actualizarCarrito ()
+    carrito.length = [];
+    actualizarCarrito ();
 })
 
 
@@ -121,26 +111,41 @@ const actualizarCarrito = () => {
     containerCarrito.innerHTML = " ";
 
     carrito.forEach((producto) => {
-        const div = document.createElement('div')
-        div.className = (`productoEnCarrito text-white mt-5 rounded-2 d-flex`)
-        const {id, nombre, precio, cantidad, img} = producto
-        div.innerHTML = `
+        const div = document.createElement('div');
+        div.className = (`productoEnCarrito text-white mt-5 rounded-2 d-flex`);
+        const {id, nombre, precio, cantidad, img} = producto;
+        div.innerHTML += `
                         <div> 
-                            <img src="./img/${img}" alt="HK-USP" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3 w-75">
+                            <img src="./img/${img}" alt="HK-USP" class="section1-catalogo__article1 article1__div1-img img-fluid border border-dark rounded-3 w-75">
                         </div>
                         <div> 
-                            <p class="border border-light border-3 p-2 rounded-2 mt-2"> ${nombre}</p>
-                            <p class="border border-light border-3 p-2 rounded-2"> Precio: $ ${precio}</p>
-                            <p class="border border-light border-3 p-2 rounded-2"> Cantidad: <span id="cantidad"> ${cantidad}</p>
-                            <button onclick = "eliminarProducto(${id})" class="boton-eliminar p-2 rounded-2">Eliminar producto</button>
+                            <p class="border border-light border-2 p-2 rounded-2 mt-2"> ${nombre}</p>
+                            <p class="border border-light border-2 p-2 rounded-2"> Precio: $ ${precio}</p>
+                            <p class="border border-light border-2 p-2 rounded-2"> Cantidad: <span id="cantidad"> ${cantidad}</p>
+                            <button onclick = "eliminarProducto(${id})" class="btn btn-danger boton-eliminar p-2 rounded-2 border border-white">Eliminar producto</button>
                         </div>
                         `
         containerCarrito.appendChild(div);     
         
-        localStorage.setItem('carrito', JSON.stringify(carrito))
+
     })
 
-     contadorCarrito.innerText = carrito.length
-     precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.precio, 0)
 
+    contadorCarrito.textContent = carrito.length;
+    precioTotal.textContent = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
+
+    guardarEnStorage ()
+
+}
+
+//funcion para eliminar productos
+function eliminarProducto(prodId) {
+    const id = prodId
+    carrito = carrito.filter((producto) => producto.id !== prodId);
+    actualizarCarrito();
+}
+
+//funcion para guardar en el LocalStorage
+function guardarEnStorage (){
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }

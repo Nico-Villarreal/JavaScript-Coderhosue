@@ -76,7 +76,7 @@
 
 <!-------------modal carrito----------->
   <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content bg-secondary">
                 <div class="modal-carrito m-5 bg-secondary rounded-2 mt-3 justify-content-center">
                     <div class="modal-header">
@@ -88,12 +88,13 @@
                     </div>
                     <p class="precioProducto text-center bg-secondary mt-3">Precio total: $<span id="precioTotal">0</span></p>
                     <div class="modal-footer">
-                        <button id="vaciar-carrito" class="boton-agregar m-3 p-2 rounded-2 ">Vaciar carrito</button>
+                        <button id="vaciar-carrito" class="btn-danger m-3 p-2 rounded-2">Vaciar carrito</button>
+                        <button id="finalizar-compra" class="m-3 p-2 rounded-2">Finalizar Compra</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+  </div>
   
 <!-------------payment-methods------------>
     <section id="section3-medios-de-pagos" class="section3 d-flex flex-wrap align-items-center mx-4 my-5">
