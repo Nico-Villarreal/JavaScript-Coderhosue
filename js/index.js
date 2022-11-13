@@ -11,7 +11,7 @@ const finalizarCompra = document.getElementById('finalizar-compra')
 const activarFuncion = document.getElementById('activarFuncion')
 const containerCarrito = document.getElementById('container-Carrito');
 const divArticle = document.getElementById ('divArticle');
-
+const buscador = document.getElementById ('buscador')
 
 let carrito = []
 
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
+const filtrado = catalogo.filter((producto) => producto === '')
 
 // agregando productos en cards con innerHTML
 
@@ -86,27 +87,31 @@ const agregarCarrito = (prodId) => {
 //boton de vaciar productos del carrito 
 if(botonVaciar){
     botonVaciar.addEventListener ('click', () => {
-        swal({
-            title: "Desea eliminar los productos",
-            text: "Una vez eliminados deberas agregarlos nuevamente",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete ) => {
-            
-            if (willDelete) {
-              swal("Productos eliminados correctamente", {
-                icon: "success",
+        if(carrito.length != []){
+            swal({
+                title: "Desea eliminar todos los productos?",
+                text: "Una vez eliminados deberas agregarlos nuevamente",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete ) => {
+                if (willDelete) {
+                  swal("Productos eliminados correctamente", {
+                    icon: "success",
+                  });
+                  carrito.length = [];
+                  actualizarCarrito ();
+    
+                } else {
+                  swal("Continua con tu compra");
+                }
               });
-              carrito.length = [];
-            } else {
-              swal("Continua con tu compra");
-            }
-          });
-    
-    
-          actualizarCarrito ();
+        }else{
+            swal("No hay productos para eliminar", "Agregalos", "warning");;
+
+        }
+        
     })
 }
 

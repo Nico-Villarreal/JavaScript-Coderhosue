@@ -48,7 +48,7 @@
                         </li>
                     </ul>
                     <form role="search" class="d-flex gap-2 justify-content-center">
-                        <input class="form-control w-75" type="search" placeholder="Search" aria-label="Search">
+                        <input id="buscador" class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
                     </form>
                     <div class="d-flex gap-3">
                         <button id="boton-carrito" class="btn btn-secondary d-flex flex-row p-1" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -63,19 +63,19 @@
     </header>
 <!-------------payment-form------------>
 <button id="activarFuncion" class="opacity-0">¡Click!</button>
-    <section class="container bg-light text-dark rounded-2 p-5">
+    <section class="container bg-light text-dark rounded-2 p-5 my-5">
             <div class="row mt-3">
                 <div class="col">
-                    <h2 class="d-flex justify-content-center mb-3 text-dark">Procesar Compra</h2>
+                    <h2 class="d-flex justify-content-center mb-4 text-dark">Procesar Compra</h2>
                     <form id="procesar-pago" method="POST">
                         <div class="form-group row mt-3">
-                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">*Cliente :</label>
                             <div class="col-12 col-md-10">
                                 <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" name="persona">
                             </div>
                         </div>
                         <div class="form-group row mt-3">
-                            <label for="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Correo :</label>
                             <div class="col-12 col-md-10">
                                 <input type="text"  id="correo" class="form-control"  name="email.id" id="email.id">
                             </div>
@@ -115,12 +115,12 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-between">
-                            <div class="col-md-4 mb-2">
-                                <a href="index.html" class="btn btn-info btn-block">Seguir comprando</a>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 d-flex justify-content-center">
+                                <a href="index.html" class="btn btn-info btn-block m-5">Seguir comprando</a>
                             </div>
-                            <div class="col-xs-12 col-md-4">
-                                 <input type="submit" class="btn btn-success btn-block" id="button" value="Finalizar compra" >
+                            <div class="col-xs-12 col-md-4 d-flex justify-content-center">
+                                 <input type="submit" class="btn btn-success btn-block m-5" id="button" value="Finalizar compra" >
                             </div>
                         </div>
                     </form>
