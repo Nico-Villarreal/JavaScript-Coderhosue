@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=}, initial-scale=1.0">
-    <meta name="description" content="Catalogo de Armas de Airsoft, la mayor variedad en productos, calidad y al mejor precio del mercado con la mas accesible financiacion en cuotas">
-    <meta name="keywords" content="CO2, ARMAS, AIRSOFT, MEDIOS DE PAGO, PRODUCTOS, IMITACION, PISTOLAS, AMETRALLADORAS, ESCOPETAS, FUSILES, REVOLVERES, TARJETA, EFECTIVO, CUOTAS, DEBITO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de compras, donde podes aplicar cupones de descuento elegir el metodo de envio y la forma de pago mas conveniente para tu medida de nuestra amplia gama de opciones">
+    <meta name="keywords" content="CO2, ARMAS, AIRSOFT, PAGO, ENVIOS, CREDITO, TRANSFERENCIA, DEBITO, EFECTIVO, CARRITO, CUPONES, DESCUENTOS, PRODUCTOS">
     <link rel="shortcut icon" href="./img/logo-1.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <title>Catalogo - Imitation of Weapons </title>
+    <title>Carrito - Imitation of Weapons</title>
 </head>
-<body id="grid-container-catalogue">
+<body id="container-shopping">
 <!-------------header------------>
     <header class="header d-flex flex-wrap justify-content-between align-items-end border-bottom border-dark p-2 gap-3 border-2">
     <!-------------nav-bar------------> 
@@ -61,64 +61,73 @@
         </nav>
 
     </header>
-    
-    <h2 class="catalogo__h2-1 d-flex justify-content-center p-3">ARTICULOS EN STOCK</h2>
-<!-------------products-grid------------>
-    <section id="section1-catalogo" class="section1-catalogo pt-4 pb-0 justify-content-center">
+<!-------------payment-form------------>
+<button id="activarFuncion" class="opacity-0">¡Click!</button>
+    <section class="container bg-light text-dark rounded-2 p-5">
+            <div class="row mt-3">
+                <div class="col">
+                    <h2 class="d-flex justify-content-center mb-3 text-dark">Procesar Compra</h2>
+                    <form id="procesar-pago" method="POST">
+                        <div class="form-group row mt-3">
+                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" name="persona">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-3">
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">Correo :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="text"  id="correo" class="form-control"  name="email.id" id="email.id">
+                            </div>
+                        </div>
 
-        <h3 class="section1-catalogo__h3 d-flex justify-content-start pb-4">Pistolas y Revolveres</h3>
+                        <div id="carrito" class="form-group table-responsive mt-3">
+                            <table class="table" id="lista-compra">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Producto</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Precio</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Sub Total</th>
+                                    </tr>
 
-        <div id="divArticle" class="section1__container-article div-container flex-column">
+                                </thead>
+                                <tbody id="tbody">
 
-        </div>
+                                </tbody>
+                                <tr>
+                                    <th colspan="4" scope="col" class="text-end">TOTAL
+                                        <p id="totalProceso" class="text-dark"></p>
+                                    </th>
+                                </tr>
 
-    </section>
+                            </table>
+                        </div>
+                        <div class="d-flex m-3 justify-content-center">
+                            <div class="sk-chase d-none" id="spinner">
+                                <div class="sk-chase-dot"></div>
+                                <div class="sk-chase-dot"></div>
+                                <div class="sk-chase-dot"></div>
+                                <div class="sk-chase-dot"></div>
+                                <div class="sk-chase-dot"></div>
+                                <div class="sk-chase-dot"></div>
+                            </div>
+                        </div>
 
-<!-------------modal carrito----------->
-  <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content bg-secondary">
-                <div class="modal-carrito m-5 bg-secondary rounded-2 mt-3 justify-content-center">
-                    <div class="modal-header">
-                        <h3 class="text-center">Carrito</h3>
-                        <button type="button" class="btn-close border border-dark" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div id="container-Carrito" class="mt-5 gap-5">
-
-                    </div>
-                    <p class="precioProducto text-center bg-secondary mt-3">Precio total: $<span id="precioTotal">0</span></p>
-                    <div class="modal-footer">
-                        <button id="vaciar-carrito" class="btn btn-warning border m-3 p-2 rounded-2">Vaciar carrito</button>
-                        <button id="finalizar-compra" class="btn btn-success border m-3 p-2 rounded-2">Ir al Pago</button>
-                    </div>
+                        <div class="row justify-content-between">
+                            <div class="col-md-4 mb-2">
+                                <a href="index.html" class="btn btn-info btn-block">Seguir comprando</a>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                                 <input type="submit" class="btn btn-success btn-block" id="button" value="Finalizar compra" >
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
         </div>
-  </div>
-  
-<!-------------payment-methods------------>
-    <section id="section3-medios-de-pagos" class="section3 d-flex flex-wrap align-items-center mx-4 my-5">
-        <h2 class="section3__h3 text-center p-4 w-100">MEDIOS DE PAGOS</h2>
-        <section class="section3__content d-flex justify-content-around flex-wrap w-100 border-3 border border-dark rounded-3">
-            <article class="section3__content--article d-flex align-items-center mx-3 my-3">
-                <img src="./img/tarjeta_de_credito.webp" alt="credito" class="section3__content--article--img mx-2 border border-dark rounded-5">
-                <h4 class="section3__content--article--h4 ms-3 text-center"><a href="Pagos-y-Devoluciones.html#pagos">Tarjeta de Credito</a></h4>
-            </article>
-            <article class="section3__content--article d-flex align-items-center mx-3 my-3">
-                <img src="./img/debito.webp" alt="debito" class="section3__content--article--img mx-2 border border-dark rounded-5">
-                <h4 class="section3__content--article--h4 ms-3 text-center"><a href="Pagos-y-Devoluciones.html#pagos">Tarjeta de Debito</a></h4>
-            </article>
-            <article class="section3__content--article d-flex align-items-center mx-3 my-3">
-                <img src="./img/efectivo.webp" alt="efectivo" class="section3__content--article--img mx-2 border border-dark rounded-5">
-                <h4 class="section3__content--article--h4 ms-3 text-center"><a href="Pagos-y-Devoluciones.html#pagos">Pago en Efectivo</a></h4>
-            </article>
-            <article class="section3__content--article d-flex align-items-center mx-3 my-3">
-                <img src="./img/ofertas.webp" alt="promociones" class="section3__content--article--img mx-2 border border-dark rounded-5">
-                <h4 class="section3__content--article--h4 ms-3 text-center" ><a href="Pagos-y-Devoluciones.html#promociones">Promociones</a></h4>
-            </article>
-        </section>
     </section>
-<!-------------footer------------>
+<!-------------footer----------->
     <footer class="footer py-4 d-flex flex-column border-3 border border-light rounded-3">
         <div class="row">
             <div class="col-xl-6 mb-3">
@@ -158,12 +167,15 @@
             <p class="m-3">© 2022 Imitation of Weapon, S.A All rights reserved.</p>
         </div>
     </footer>
-    
+
     <script src="./js/bootstrap.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="./js/catalogo.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/carrito.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
-
