@@ -1,6 +1,29 @@
 //mi proyecto esta orientado a darle vida al carrito de la pagina que cree en el curso de desarrolo web//
 //para esto voy a comenzar con lo basico visto en clase que es logearse, agregar productos y posteriormente realizar una suma de los procustos//
 
+const cargarCatalogo = async () =>{
+    try{
+        const respuesta = await fetch ('./js/catalogo.json')
+        console.log(respuesta)
+        if(respuesta.status ===200){
+            const datos = await respuesta.json()
+            console.log(datos)
+        }else if (respuesta.status === 401){
+            console.log("sin conexion")
+        }else if (respuesta.status === 404){
+            console.log("sin productos")
+        }else{
+            console.log ("error gravisimo")
+        }
+
+
+
+
+    }catch(error) {
+       console.log(error)
+    }
+}
+cargarCatalogo()
 
 //constantes para selecconar ID del HTML
 
@@ -188,10 +211,10 @@ function procesarCompra() {
                         <td>
                         <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
                         </td>
-                        <td>${nombre}</td>
-                        <td>${precio}</td>
-                        <td>${cantidad}</td>
-                        <td>${precio * cantidad}</td>
+                        <td class="fw-bolder">${nombre}</td>
+                        <td class="fw-bolder">$ ${precio}</td>
+                        <td class="fw-bolder">${cantidad}</td>
+                        <td class="fw-bolder">$ ${precio * cantidad}</td>
                         `;
         listaCompra.appendChild(row);
     });
@@ -201,3 +224,5 @@ function procesarCompra() {
       0
     );
 }
+
+

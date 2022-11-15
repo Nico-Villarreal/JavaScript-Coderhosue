@@ -24,6 +24,7 @@ function enviarPedido(e){
             formCompra.reset();
         }, 3500)
 
+        localStorage.clear();
     }
 
 }

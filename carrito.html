@@ -35,7 +35,7 @@
                             <a class="nav-link bg-light link-dark border border-dark m-1 fw-semibold rounded-2 p-2" aria-current="page" href="./index.html">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active border border-dark m-1 bg-secondary fw-semibold rounded-2 p-2" href="./catalogo.html">CATALOGO</a>
+                            <a class="nav-link border border-dark m-1 bg-light link-dark fw-semibold rounded-2 p-2" href="./catalogo.html">CATALOGO</a>
                         </li>
                         <li class="nav-item"> 
                             <a class="nav-link border border-dark m-1 bg-light link-dark fw-semibold rounded-2 p-2" href="./contacto.html">CONTACTO</a>
@@ -84,16 +84,19 @@
                         <div id="carrito" class="form-group table-responsive mt-3">
                             <table class="table" id="lista-compra">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">Producto</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Precio</th>
-                                        <th scope="col">Cantidad</th>
-                                        <th scope="col">Sub Total</th>
+                                    <tr class="border-bottom border-dark">
+                                        <th scope="col text-center">Producto</th>
+                                        <th scope="col text-center">Nombre</th>
+                                        <th scope="col text-center">Precio Unitario</th>
+                                        <th scope="col text-center">Cantidad</th>
+                                        <th scope="col text-center">Sub Total</th>
                                     </tr>
 
                                 </thead>
                                 <tbody id="tbody">
+
+                                </tbody>
+                                <tbody>
 
                                 </tbody>
                                 <tr>
@@ -117,10 +120,10 @@
 
                         <div class="row justify-content-center">
                             <div class="col-md-4 d-flex justify-content-center">
-                                <a href="index.html" class="btn btn-info btn-block m-5">Seguir comprando</a>
+                                <a href="index.html" class="btn btn-warning btn-block m-5 border border-dark">Seguir comprando</a>
                             </div>
                             <div class="col-xs-12 col-md-4 d-flex justify-content-center">
-                                 <input type="submit" class="btn btn-success btn-block m-5" id="button" value="Finalizar compra" >
+                                 <input type="submit" class="btn btn-success btn-block m-5 border border-dark" id="button" value="Finalizar compra" >
                             </div>
                         </div>
                     </form>
