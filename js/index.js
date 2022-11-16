@@ -1,29 +1,6 @@
 //mi proyecto esta orientado a darle vida al carrito de la pagina que cree en el curso de desarrolo web//
 //para esto voy a comenzar con lo basico visto en clase que es logearse, agregar productos y posteriormente realizar una suma de los procustos//
 
-const cargarCatalogo = async () =>{
-    try{
-        const respuesta = await fetch ('./js/catalogo.json')
-        console.log(respuesta)
-        if(respuesta.status ===200){
-            const datos = await respuesta.json()
-            console.log(datos)
-        }else if (respuesta.status === 401){
-            console.log("sin conexion")
-        }else if (respuesta.status === 404){
-            console.log("sin productos")
-        }else{
-            console.log ("error gravisimo")
-        }
-
-
-
-
-    }catch(error) {
-       console.log(error)
-    }
-}
-cargarCatalogo()
 
 //constantes para selecconar ID del HTML
 
@@ -34,27 +11,77 @@ const finalizarCompra = document.getElementById('finalizar-compra')
 const activarFuncion = document.getElementById('activarFuncion')
 const containerCarrito = document.getElementById('container-Carrito');
 const divArticle = document.getElementById ('divArticle');
-const buscador = document.getElementById ('buscador')
+
 
 let carrito = []
 
 //iniciando DOM en el proyecto
 
-document.addEventListener('DOMContentLoaded', () => {
-    carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    actualizarCarrito();
-
-    if(activarFuncion){
-        document.querySelector('#activarFuncion').click(procesarCompra);
-    }
-
-})
-
-const filtrado = catalogo.filter((producto) => producto === '')
+document.addEventListener('DOMContentLoaded', traerProductos)
 
 // agregando productos en cards con innerHTML
 
-if(divArticle){
+async function traerProductos(){
+    const url = './js/catalogo.json'
+
+    try{
+        const resultado = await fetch(url)
+        const respuesta = await resultado.json()
+        pintarProductos(respuesta)
+
+    }catch(error){
+        console.log(error)
+    }
+}
+function pintarProductos(productos){
+        productos.forEach(prod => {
+        let article = document.createElement('article')
+        article.classList.add('section1-catalogo__article', 'd-flex', 'flex-column', 'm-2');
+        const {id, nombre, tipo, calibre, capacidad, precio, img} = prod
+        article.innerHTML +=`
+                            <div class="section1-catalogo__article-1--div1 div-article__active">
+                                <img src="./img/${img}" alt="${nombre}" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3">
+                            </div>
+                            <div class="section1-catalogo__article-1--div2 d-flex flex-column justify-content-center border border-dark rounded-3 pb-2">
+                                <p class="section1-catalogo__article-1--div2--text justify-content-center m-1">
+                                    <h4 class="section1-catalogo__article-1--div2--text--h4 text-center mx-0 my-2">${nombre}</h4>
+                                    <p class="text-center m-1 text-dark"><b>PRODUCTO N° ${id}</b></p>
+                                    <p class="text-center m-1 text-dark">${tipo}</p>
+                                    <p class="text-center m-1 text-dark">Calibre ${calibre}</p>
+                                    <p class="text-center m-1 text-dark">Cargador ${capacidad}</p>
+                                    <p class="text-center m-1 text-dark"><b>$ ${precio}</b></p>
+                                </p>
+                                <button type="button" id="agregar${id}" class="btn btn-secondary m-3">AGREGAR</button>
+                            </div>
+                            `
+            divArticle.appendChild(article); 
+
+    //agregando evento al tag "button" de agregar al carrito
+    
+            const boton = document.getElementById(`agregar${id}`)
+    
+            boton.addEventListener('click', () => {
+                agregarCarrito(id);
+            })
+        
+        })
+    }      
+
+traerProductos()
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*if(divArticle){
     catalogo.forEach(producto => {
     let article = document.createElement('article');
     article.classList.add('section1-catalogo__article', 'd-flex', 'flex-column', 'm-2');
@@ -224,5 +251,37 @@ function procesarCompra() {
       0
     );
 }
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
