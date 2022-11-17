@@ -34,5 +34,5 @@ catalogo.push(new producto(16, "KSP-LIGHT", "Sem. Aut./Automtica", "7,62 mm", "1
 catalogo.push(new producto(17, "AKKAR TACTICAL", "Semiautomtica", "12", "8 cart.", 6500, "AKKAR.webp", 1, "Escopetas"));
 catalogo.push(new producto(18, "LEGEND JW-2005", "Semiautomtica", "12", "8 cart.", 6900, "LEGEND-JW2005.webp", 1, "Escopetas"));
 catalogo.push(new producto(19, "TAURUS ST-12", "Semiautomtica", "12", "8 cart.", 7500, "TAURUS-ST12.webp", 1, "Escopetas"));
-catalogo.push(new producto(20, "TADLER HT-304", "Semiautomtica", "12", "8 cart.", 7200, "ADLER-HT304.webp", 1, "Escopetas"));
+catalogo.push(new producto(20, "ADLER HT-304", "Semiautomtica", "12", "8 cart.", 7200, "ADLER-HT304.webp", 1, "Escopetas"));
 
