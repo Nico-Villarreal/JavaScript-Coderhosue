@@ -59,7 +59,7 @@ function pintarProductos(catalogo){
                                     <p class="text-center m-1 text-dark">${tipo}</p>
                                     <p class="text-center m-1 text-dark">Calibre ${calibre}</p>
                                     <p class="text-center m-1 text-dark">Cargador ${capacidad}</p>
-                                    <p class="text-center m-1 text-dark"><b>$ ${precio}</b></p>
+                                    <p class="text-center m-1 text-dark"><b> ${precio}</b></p>
                                 </p>
                                 <button type="button" id="agregar${id}" class="btn btn-secondary m-3">AGREGAR</button>
                             </div>`
@@ -204,10 +204,10 @@ function procesarCompra() {
                     <td>
                     <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
                     </td>
-                    <td>${nombre}</td>
-                    <td>${precio}</td>
-                    <td>${cantidad}</td>
-                    <td>${precio * cantidad}</td>
+                    <td class="fw-semibold">${nombre}</td>
+                    <td class="fw-semibold">$ ${precio}</td>
+                    <td class="fw-semibold">${cantidad}</td>
+                    <td class="fw-semibold">$ ${precio * cantidad}</td>
                     `;
         listaCompra.appendChild(row);
     });
@@ -215,12 +215,4 @@ function procesarCompra() {
     (acc, prod) => acc + prod.cantidad * prod.precio,
     0
     );
-}
-
-function mostrarAlerta(texto, duracion, posicion) {
-    Toastify({
-        text: texto,
-        duration: duracion,
-        gravity: posicion,
-    }).showToast();
 }
