@@ -11,6 +11,7 @@ const finalizarCompra = document.getElementById('finalizar-compra')
 const activarFuncion = document.getElementById('activarFuncion')
 const containerCarrito = document.getElementById('container-Carrito');
 const divArticle = document.getElementById ('divArticle');
+const sitioConstruccion = document.querySelectorAll('#consturccion')
 
 let carrito = []
 
@@ -18,6 +19,7 @@ let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
     traerProductos()
+    
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     actualizarCarrito();
     if(activarFuncion){
@@ -67,14 +69,28 @@ function pintarProductos(catalogo){
 
             const boton = document.getElementById(`agregar${id}`)
             boton.addEventListener('click', () => {
-                agregarCarrito(id);
+                agregarCarrito(id)
+                Toastify({
+                    text: "Producto agregado al carrito",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "bottom", 
+                    position: "right", 
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                      background: "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(91,91,91,1) 31%, rgba(154,154,154,1) 79%)",
+                    },
+                  }).showToast();
+
             })
         }) 
     }
 }
 
 //let para agregar productos con el tag "button" al carrito
+
 const agregarCarrito = (prodId) => {
+    
     const existe = carrito.some((producto) => producto.id === prodId);
         
         if(existe){
@@ -84,6 +100,7 @@ const agregarCarrito = (prodId) => {
                 }
             })
         }else{
+
             const item = catalogo.find((producto) => producto.id === prodId);
             carrito.push(item);    
         }
@@ -93,29 +110,36 @@ const agregarCarrito = (prodId) => {
 //boton de vaciar productos del carrito 
 if(botonVaciar){
     botonVaciar.addEventListener ('click', () => {
-        swal({
-            title: "Desea eliminar los productos",
-            text: "Una vez eliminados deberas agregarlos nuevamente",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete ) => {
-            
-            if (willDelete) {
-              swal("Productos eliminados correctamente", {
-                icon: "success",
+        if(carrito.length === 0){
+            swal("No hay productos para eliminar", {
+                icon: "warning",
               });
-              carrito.length = [];
-              actualizarCarrito ();
-            } else {
-              swal("Continua con tu compra");
-            }
-          }); 
+        }else{
+            swal({
+                title: "Desea eliminar los productos",
+                text: "Una vez eliminados deberas agregarlos nuevamente",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete ) => {
+                
+                if (willDelete) {
+                  swal("Productos eliminados correctamente", {
+                    icon: "success",
+                  });
+                  carrito.length = [];
+                  actualizarCarrito ();
+                } else {
+                  swal("Continua con tu compra");
+                }
+              }); 
+        }
+
     })
 }
 
-//boton para finalizar compra e ir para la pagina de compra
+//boton para finalizar compra e ir para la pagina de finalizar compra
 if(finalizarCompra){
     finalizarCompra.addEventListener('click', () =>{
         if (carrito.length === 0) {
@@ -171,18 +195,7 @@ function guardarEnStorage (){
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-
-const urlCarrito = (`./js/catalogo.json`)
-
-fetch(urlCarrito)
-    .then(respuesta => respuesta.json())
-    .then((datos) => {
-        procesarCompra(datos)
-    })
-    .catch(error => console.log(error))
-
 function procesarCompra() {
-
     carrito.forEach(datos => {
     const listaCompra = document.querySelector("#tbody");
     const {nombre, precio, img, cantidad } = datos;
@@ -202,4 +215,12 @@ function procesarCompra() {
     (acc, prod) => acc + prod.cantidad * prod.precio,
     0
     );
+}
+
+function mostrarAlerta(texto, duracion, posicion) {
+    Toastify({
+        text: texto,
+        duration: duracion,
+        gravity: posicion,
+    }).showToast();
 }
