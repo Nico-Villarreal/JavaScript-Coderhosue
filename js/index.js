@@ -76,25 +76,32 @@ const agregarCarrito = (prodId) => {
 //boton de vaciar productos del carrito 
 if(botonVaciar){
     botonVaciar.addEventListener ('click', () => {
-        swal({
-            title: "Desea eliminar los productos",
-            text: "Una vez eliminados deberas agregarlos nuevamente",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete ) => {
-            
-            if (willDelete) {
-              swal("Productos eliminados correctamente", {
-                icon: "success",
+        if(carrito.length === 0){
+            swal("No hay productos para eliminar", {
+                icon: "warning",
               });
-              carrito.length = [];
-              actualizarCarrito ();
-            } else {
-              swal("Continua con tu compra");
-            }
-          }); 
+        }else{
+            swal({
+                title: "Desea eliminar los productos",
+                text: "Una vez eliminados deberas agregarlos nuevamente",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete ) => {
+                
+                if (willDelete) {
+                  swal("Productos eliminados correctamente", {
+                    icon: "success",
+                  });
+                  carrito.length = [];
+                  actualizarCarrito ();
+                } else {
+                  swal("Continua con tu compra");
+                }
+              }); 
+        }
+
     })
 }
 
