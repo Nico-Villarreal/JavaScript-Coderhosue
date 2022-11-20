@@ -59,7 +59,7 @@ function pintarProductos(catalogo){
                                     <p class="text-center m-1 text-dark">${tipo}</p>
                                     <p class="text-center m-1 text-dark">Calibre ${calibre}</p>
                                     <p class="text-center m-1 text-dark">Cargador ${capacidad}</p>
-                                    <p class="text-center m-1 text-dark"><b> ${precio}</b></p>
+                                    <p class="text-center m-1 text-dark"><b> $ ${precio}</b></p>
                                 </p>
                                 <button type="button" id="agregar${id}" class="btn btn-secondary m-3">AGREGAR</button>
                             </div>`
