@@ -57,7 +57,6 @@ img {
  
 #section1-catalogo{
     margin: 0rem 5.5rem;}
-
 .div-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));

@@ -11,11 +11,15 @@ const finalizarCompra = document.getElementById('finalizar-compra')
 const activarFuncion = document.getElementById('activarFuncion')
 const containerCarrito = document.getElementById('container-Carrito');
 const divArticle = document.getElementById ('divArticle');
+const sitioConstruccion = document.querySelectorAll('#consturccion')
+
 let carrito = []
 
 //iniciando DOM en el proyecto
 
 document.addEventListener('DOMContentLoaded', () => {
+    traerProductos()
+    
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     actualizarCarrito();
     if(activarFuncion){
@@ -23,41 +27,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+//utilizando fetch para traer productos del json local
+async function traerProductos(){
+    const url = './js/catalogo.json' 
+    
+    try{
+        const resultado = await fetch(url);
+        const respuesta = await resultado.json();
+        pintarProductos(respuesta);
+
+    }catch (error){
+        console.log(error);
+    }
+}
+
 // agregando productos en cards con innerHTML
-if(divArticle){
-    catalogo.forEach(producto => {
-    let article = document.createElement('article');
-    article.classList.add('section1-catalogo__article', 'd-flex', 'flex-column', 'm-2');
-    const {id, nombre, tipo, calibre, capacidad, precio, img} = producto
-    article.innerHTML = 
-                       `<div class="section1-catalogo__article-1--div1 div-article__active">
-                            <img src="./img/${img}" alt="${nombre}" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3">
-                        </div>
-                        <div class="section1-catalogo__article-1--div2 d-flex flex-column justify-content-center border border-dark rounded-3 pb-2">
-                            <p class="section1-catalogo__article-1--div2--text justify-content-center m-1">
-                                <h4 class="section1-catalogo__article-1--div2--text--h4 text-center mx-0 my-2">${nombre}</h4>
-                                <p class="text-center m-1 text-dark"><b>PRODUCTO N° ${id}</b></p>
-                                <p class="text-center m-1 text-dark">${tipo}</p>
-                                <p class="text-center m-1 text-dark">Calibre ${calibre}</p>
-                                <p class="text-center m-1 text-dark">Cargador ${capacidad}</p>
-                                <p class="text-center m-1 text-dark"><b>$ ${precio}</b></p>
-                            </p>
-                            <button type="button" id="agregar${id}" class="btn btn-secondary m-3">AGREGAR</button>
-                        </div>`
-        divArticle.appendChild(article); 
-    
-//agregando evento al tag "button" de agregar al carrito
-        const boton = document.getElementById(`agregar${id}`)
-        boton.addEventListener('click', () => {
-            agregarCarrito(id);
-        })
-    
-    })
-    
+function pintarProductos(catalogo){
+        if(divArticle){
+        catalogo.forEach(producto => {
+        let article = document.createElement('article');
+        article.classList.add('section1-catalogo__article', 'd-flex', 'flex-column', 'm-2');
+        const {id, nombre, tipo, calibre, capacidad, precio, img} = producto
+        article.innerHTML = 
+                        `<div class="section1-catalogo__article-1--div1 div-article__active">
+                                <img src="./img/${img}" alt="${nombre}" class="section1-catalogo__article1 article1__div1-img border border-dark rounded-3">
+                            </div>
+                            <div class="section1-catalogo__article-1--div2 d-flex flex-column justify-content-center border border-dark rounded-3 pb-2">
+                                <p class="section1-catalogo__article-1--div2--text justify-content-center m-1">
+                                    <h4 class="section1-catalogo__article-1--div2--text--h4 text-center mx-0 my-2">${nombre}</h4>
+                                    <p class="text-center m-1 text-dark"><b>PRODUCTO N° ${id}</b></p>
+                                    <p class="text-center m-1 text-dark">${tipo}</p>
+                                    <p class="text-center m-1 text-dark">Calibre ${calibre}</p>
+                                    <p class="text-center m-1 text-dark">Cargador ${capacidad}</p>
+                                    <p class="text-center m-1 text-dark"><b> $ ${precio}</b></p>
+                                </p>
+                                <button type="button" id="agregar${id}" class="btn btn-secondary m-3">AGREGAR</button>
+                            </div>`
+            divArticle.appendChild(article); 
+        
+    //agregando evento al tag "button" de agregar al carrito
+
+            const boton = document.getElementById(`agregar${id}`)
+            boton.addEventListener('click', () => {
+                agregarCarrito(id)
+                Toastify({
+                    text: "Producto agregado al carrito",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "bottom", 
+                    position: "right", 
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                      background: "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(91,91,91,1) 31%, rgba(154,154,154,1) 79%)",
+                    },
+                  }).showToast();
+
+            })
+        }) 
+    }
 }
 
 //let para agregar productos con el tag "button" al carrito
+
 const agregarCarrito = (prodId) => {
+    
     const existe = carrito.some((producto) => producto.id === prodId);
         
         if(existe){
@@ -67,6 +100,7 @@ const agregarCarrito = (prodId) => {
                 }
             })
         }else{
+
             const item = catalogo.find((producto) => producto.id === prodId);
             carrito.push(item);    
         }
@@ -105,7 +139,7 @@ if(botonVaciar){
     })
 }
 
-//boton para finalizar compra e ir para la pagina de compra
+//boton para finalizar compra e ir para la pagina de finalizar compra
 if(finalizarCompra){
     finalizarCompra.addEventListener('click', () =>{
         if (carrito.length === 0) {
@@ -160,24 +194,25 @@ function eliminarProducto(prodId) {
 function guardarEnStorage (){
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
+
 function procesarCompra() {
-    carrito.forEach((producto) => {
+    carrito.forEach(datos => {
     const listaCompra = document.querySelector("#tbody");
-    const {nombre, precio, img, cantidad } = producto;
+    const {nombre, precio, img, cantidad } = datos;
         const row = document.createElement("tr");
         row.innerHTML += `
-                        <td>
-                        <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
-                        </td>
-                        <td>${nombre}</td>
-                        <td>${precio}</td>
-                        <td>${cantidad}</td>
-                        <td>${precio * cantidad}</td>
-                        `;
+                    <td>
+                    <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
+                    </td>
+                    <td class="fw-semibold">${nombre}</td>
+                    <td class="fw-semibold">$ ${precio}</td>
+                    <td class="fw-semibold">${cantidad}</td>
+                    <td class="fw-semibold">$ ${precio * cantidad}</td>
+                    `;
         listaCompra.appendChild(row);
     });
     totalProceso.innerText = carrito.reduce(
-      (acc, prod) => acc + prod.cantidad * prod.precio,
-      0
+    (acc, prod) => acc + prod.cantidad * prod.precio,
+    0
     );
 }
