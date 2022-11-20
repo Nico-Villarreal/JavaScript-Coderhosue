@@ -187,6 +187,7 @@ const actualizarCarrito = () => {
 function eliminarProducto(prodId) {
     const id = prodId
     carrito = carrito.filter((producto) => producto.id !== prodId);
+    swal("Eliminaste el producto satisfactoriamente", " ", "success");
     actualizarCarrito();
 }
 
