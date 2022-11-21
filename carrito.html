@@ -69,15 +69,27 @@
                     <h2 class="d-flex justify-content-center mb-4 text-dark">Procesar Compra</h2>
                     <form id="procesar-pago" method="POST">
                         <div class="form-group row mt-3">
-                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">*Cliente :</label>
+                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">*Nombre :</label>
                             <div class="col-12 col-md-10">
-                                <input type="text" class="form-control" id="cliente" placeholder="Ingresa nombre cliente" name="persona">
+                                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre..." name="nombre.id">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-3">
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Apellido :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="text"  id="apellido" placeholder="Ingresa tu apellido..." class="form-control"  name="apellido.id" id="email.id">
                             </div>
                         </div>
                         <div class="form-group row mt-3">
                             <label for="email" class="col-12 col-md-2 col-form-label h2">*Correo :</label>
                             <div class="col-12 col-md-10">
-                                <input type="text"  id="correo" class="form-control"  name="email.id" id="email.id">
+                                <input type="email"  id="correo" placeholder="Ingresa tu correo..."class="form-control"  name="correo.id" id="email.id">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-3">
+                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Telefono de contacto :</label>
+                            <div class="col-12 col-md-10">
+                                <input type="number"  id="telefono" placeholder="Ingresa tu telefono..."class="form-control"  name="telefono.id" id="email.id">
                             </div>
                         </div>
 
@@ -179,5 +191,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         AOS.init();
     </script>
+
 </body>
 </html>

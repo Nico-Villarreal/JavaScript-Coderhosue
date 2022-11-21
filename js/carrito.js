@@ -7,10 +7,12 @@ formCompra.addEventListener('submit', enviarPedido)
 function enviarPedido(e){
     e.preventDefault()
 
-    const cliente = document.getElementById('cliente').value
+    const nombre = document.getElementById('nombre').value
+    const apellido = document.getElementById('apellido').value
     const correo = document.getElementById('correo').value
+    const telefono = document.getElementById('telefono').value
 
-    if(correo === "" || cliente === ""){
+    if(nombre === "" || apellido === "" || correo === "" || telefono === ""){
         swal("Rellena el Formulario", "Debes completar los campos vacios", "error");
     }else{
         const spinenr = document.getElementById('spinner')
@@ -25,7 +27,7 @@ function enviarPedido(e){
         }, 3500)
         setTimeout(()=>{
             swal({
-                title: "Compra realziada con exito!",
+                title: "Compra realizada con exito!",
                 text: "Garcias por elegirnos, seras redirigdo a catalogo",
                 icon: "success",
               });}, 4000)
@@ -36,5 +38,3 @@ function enviarPedido(e){
     }
 
 }
-
-

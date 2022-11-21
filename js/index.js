@@ -1,6 +1,7 @@
+//
 //mi proyecto esta orientado a darle vida al carrito de la pagina que cree en el curso de desarrolo web//
 //para esto voy a comenzar con lo basico visto en clase que es logearse, agregar productos y posteriormente realizar una suma de los procustos//
-
+//
 
 
 //constantes para selecconar ID del HTML
@@ -17,10 +18,8 @@ const sitioConstruccion = document.querySelectorAll('#consturccion')
 let carrito = []
 
 //iniciando DOM en el proyecto
-
 document.addEventListener('DOMContentLoaded', () => {
-    traerProductos()
-    
+    traerProductos() 
     carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     actualizarCarrito();
     if(activarFuncion){
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //utilizando fetch para traer productos del json local
 async function traerProductos(){
-    const url = './js/catalogo.json' 
+    const url = './json/catalogo.json' 
     
     try{
         const resultado = await fetch(url);
@@ -41,6 +40,7 @@ async function traerProductos(){
         console.log(error);
     }
 }
+
 
 // agregando productos en cards con innerHTML
 function pintarProductos(catalogo){
@@ -70,29 +70,32 @@ function pintarProductos(catalogo){
 
             const boton = document.getElementById(`agregar${id}`)
             boton.addEventListener('click', () => {
-                agregarCarrito(id)
                 Toastify({
                     text: "Producto agregado al carrito",
                     duration: 3000,
                     newWindow: true,
                     gravity: "bottom", 
                     position: "right", 
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    stopOnFocus: true, 
                     style: {
                       background: "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(91,91,91,1) 31%, rgba(154,154,154,1) 79%)",
                     },
                   }).showToast();
+                agregarCarrito(id)
             })
         }) 
     }
 }
 
-//let para agregar productos con el tag "button" al carrito
 
+//let para agregar productos con el tag "button" al carrito
 const agregarCarrito = (prodId) => {
     
     const existe = carrito.some((producto) => producto.id === prodId);
-        
+    fetch(`./json/catalogo.json`)
+    .then(response => response.json())
+    .then ((catalogo) => {
+    
         if(existe){
             const prod = carrito.map(producto => {
                 if(producto.id === prodId){
@@ -100,16 +103,13 @@ const agregarCarrito = (prodId) => {
                 }
             })
         }else{
-            fetch(`./js/catalogo.json`)
-                .then(response => response.json())
-                .then ((data) => {
-                    const item = data.find((producto) => producto.id === prodId);
-                    carrito.push(item); 
-                    })
-   
+            const item = catalogo.find((data) => data.id === prodId);
+            carrito.push(item); 
         }
-        actualizarCarrito();
+    })
+    actualizarCarrito();
 }
+
 
 //boton de vaciar productos del carrito 
 if(botonVaciar){
@@ -143,6 +143,7 @@ if(botonVaciar){
     })
 }
 
+
 //boton para finalizar compra e ir para la pagina de finalizar compra
 if(finalizarCompra){
     finalizarCompra.addEventListener('click', () =>{
@@ -155,37 +156,46 @@ if(finalizarCompra){
     })
 }
 
+
 //Actuaizando el carrito nuevamente seteando el div colocando uno nuevo
 const actualizarCarrito = () => {
-    if(containerCarrito){
-        containerCarrito.innerHTML = " ";
-        carrito.forEach((producto) => {
-            const div = document.createElement('div');
-            div.className = (`productoEnCarrito text-white mt-5 rounded-2 d-flex`);
-            const {id, nombre, precio, cantidad, img} = producto;
-            div.innerHTML += `
-                            <div> 
-                                <img src="./img/${img}" alt="${nombre}" class="section1-catalogo__article1 article1__div1-img img-fluid border border-dark rounded-3 w-75">
-                            </div>
-                            <div> 
-                                <p class="border border-light border-2 p-2 rounded-2 mt-2"> ${nombre}</p>
-                                <p class="border border-light border-2 p-2 rounded-2"> Precio: $ ${precio}</p>
-                                <p class="border border-light border-2 p-2 rounded-2"> Cantidad: <span id="cantidad"> ${cantidad}</p>
-                                <button onclick = "eliminarProducto(${id})" class="btn btn-danger boton-eliminar p-2 rounded-2 border border-white">Eliminar producto</button>
-                            </div>
-                            `
-            containerCarrito.appendChild(div);
-        })
-    }
-    if(carrito.length === 0){
-        containerCarrito.innerHTML= `<p class="fs-4 fw-bolder text-center ">No hay productos agregados</p>`
-    }
-    contadorCarrito.textContent = carrito.length;
-    if(precioTotal){
-        precioTotal.textContent = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
-    }
-    guardarEnStorage ()
+    fetch(`./json/catalogo.json`)
+    .then(response => response.json())
+    .then ((data) => {
+        data = carrito
+        if(containerCarrito){
+            containerCarrito.innerHTML = " ";
+            carrito.forEach((producto) => {
+                const div = document.createElement('div');
+                div.className = (`productoEnCarrito text-white mt-5 rounded-2 d-flex`);
+                const {id, nombre, precio, cantidad, img} = producto;
+                div.innerHTML += `
+                                <div> 
+                                    <img src="./img/${img}" alt="${nombre}" class="section1-catalogo__article1 article1__div1-img img-fluid border border-dark rounded-3 w-75">
+                                </div>
+                                <div> 
+                                    <p class="border border-light border-2 p-2 rounded-2 mt-2"> ${nombre}</p>
+                                    <p class="border border-light border-2 p-2 rounded-2"> Precio: $ ${precio}</p>
+                                    <p class="border border-light border-2 p-2 rounded-2"> Cantidad: <span id="cantidad"> ${cantidad}</p>
+                                    <button onclick = "eliminarProducto(${id})" class="btn btn-danger boton-eliminar p-2 rounded-2 border border-white">Eliminar producto</button>
+                                </div>
+                                `
+                containerCarrito.appendChild(div);
+            })
+        }
+        if(carrito.length === 0){
+            containerCarrito.innerHTML= `<p class="fs-4 fw-bolder text-center ">No hay productos agregados</p>`
+        }
+        contadorCarrito.textContent = carrito.length;
+        if(precioTotal){
+            precioTotal.textContent = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0);
+        }
+        guardarEnStorage ()
+
+    })
+
 }
+
 
 //funcion para eliminar productos
 function eliminarProducto(prodId) {
@@ -195,16 +205,19 @@ function eliminarProducto(prodId) {
     actualizarCarrito();
 }
 
+
 //funcion para guardar en el LocalStorage
 function guardarEnStorage (){
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
 
+//fumcion para procesar la compra e ir al html de compra final
 function procesarCompra() {
-    fetch(`./js/catalogo.json`)
+    fetch(`./json/catalogo.json`)
     .then(response => response.json())
     .then ((data) => {
+            data = carrito
             carrito.forEach(datos => {
             const listaCompra = document.querySelector("#tbody");
             const {nombre, precio, img, cantidad } = datos;
@@ -226,25 +239,3 @@ function procesarCompra() {
             );
     })
 }
-
-/*function procesarCompra() {
-    carrito.forEach(datos => {
-    const listaCompra = document.querySelector("#tbody");
-    const {nombre, precio, img, cantidad } = datos;
-        const row = document.createElement("tr");
-        row.innerHTML += `
-                    <td>
-                    <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
-                    </td>
-                    <td class="fw-semibold">${nombre}</td>
-                    <td class="fw-semibold">$ ${precio}</td>
-                    <td class="fw-semibold">${cantidad}</td>
-                    <td class="fw-semibold">$ ${precio * cantidad}</td>
-                    `;
-        listaCompra.appendChild(row);
-    });
-    totalProceso.innerText = carrito.reduce(
-    (acc, prod) => acc + prod.cantidad * prod.precio,
-    0
-    );
-}*/
