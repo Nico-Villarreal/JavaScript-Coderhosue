@@ -68,76 +68,86 @@
                 <div class="col">
                     <h2 class="d-flex justify-content-center mb-4 text-dark">Procesar Compra</h2>
                     <form id="procesar-pago" method="POST">
-                        <div class="form-group row mt-3">
-                            <label for="cliente" class="col-12 col-md-2 col-form-label h2">*Nombre :</label>
-                            <div class="col-12 col-md-10">
-                                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre..." name="nombre.id">
-                            </div>
-                        </div>
-                        <div class="form-group row mt-3">
-                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Apellido :</label>
-                            <div class="col-12 col-md-10">
-                                <input type="text"  id="apellido" placeholder="Ingresa tu apellido..." class="form-control"  name="apellido.id" id="email.id">
-                            </div>
-                        </div>
-                        <div class="form-group row mt-3">
-                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Correo :</label>
-                            <div class="col-12 col-md-10">
-                                <input type="email"  id="correo" placeholder="Ingresa tu correo..."class="form-control"  name="correo.id" id="email.id">
-                            </div>
-                        </div>
-                        <div class="form-group row mt-3">
-                            <label for="email" class="col-12 col-md-2 col-form-label h2">*Telefono de contacto :</label>
-                            <div class="col-12 col-md-10">
-                                <input type="number"  id="telefono" placeholder="Ingresa tu telefono..."class="form-control"  name="telefono.id" id="email.id">
-                            </div>
-                        </div>
 
-                        <div id="carrito" class="form-group table-responsive mt-3">
-                            <table class="table" id="lista-compra">
-                                <thead>
-                                    <tr class="border-bottom border-dark">
-                                        <th scope="col text-center">Producto</th>
-                                        <th scope="col text-center">Nombre</th>
-                                        <th scope="col text-center">Precio Unitario</th>
-                                        <th scope="col text-center">Cantidad</th>
-                                        <th scope="col text-center">Sub Total</th>
+                        <section id="section-datos" class="bg-secondary bg-opacity-50 p-4 border border-2 border-dark rounded-3">
+                            <div class="form-group row mt-3">
+                                <label for="cliente" class="col-12 col-md-2 col-form-label h2">*Nombre :</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="text" class="form-control border-dark" id="nombre" placeholder="Ingresa tu nombre..." name="nombre.id">
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="email" class="col-12 col-md-2 col-form-label h2">*Apellido :</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="text"  id="apellido" placeholder="Ingresa tu apellido..." class="form-control border-dark"  name="apellido.id" id="email.id">
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="email" class="col-12 col-md-2 col-form-label h2">*Correo :</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="email"  id="correo" placeholder="Ingresa tu correo..." class="form-control border-dark"  name="correo.id" id="email.id">
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="email" class="col-12 col-md-2 col-form-label h2">*Telefono de contacto :</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="number"  id="telefono" placeholder="Ingresa tu telefono..."class="form-control border-dark"  name="telefono.id" id="email.id">
+                                </div>
+                            </div>    
+                        </section>
+
+                        <section id="section-carrito" class="border border-dark my-4 p-4 rounded-3">
+                            <div id="carrito" class="form-group table-responsive mt-3">
+                                <table class="table" id="lista-compra">
+                                    <thead>
+                                        <tr class="border-bottom border-dark">
+                                            <th scope="col text-center">Producto</th>
+                                            <th scope="col text-center">Nombre</th>
+                                            <th scope="col text-center">Precio Unitario</th>
+                                            <th scope="col text-center">Cantidad</th>
+                                            <th scope="col text-center">Sub Total</th>
+                                        </tr>
+    
+                                    </thead>
+                                    <tbody id="tbody">
+    
+                                    </tbody>
+                                    <tbody>
+    
+                                    </tbody>
+                                    <tr>
+                                        <th colspan="6" scope="col" class="text-end bg-secondary bg-opacity-50 px-5 rounded-3">TOTAL
+                                            <p id="totalProceso" class="text-dark"></p>
+                                        </th>
                                     </tr>
-
-                                </thead>
-                                <tbody id="tbody">
-
-                                </tbody>
-                                <tbody>
-
-                                </tbody>
-                                <tr>
-                                    <th colspan="6" scope="col" class="text-end">TOTAL
-                                        <p id="totalProceso" class="text-dark"></p>
-                                    </th>
-                                </tr>
-
-                            </table>
-                        </div>
-                        <div class="d-flex m-3 justify-content-center">
-                            <div class="sk-chase d-none" id="spinner">
-                                <div class="sk-chase-dot"></div>
-                                <div class="sk-chase-dot"></div>
-                                <div class="sk-chase-dot"></div>
-                                <div class="sk-chase-dot"></div>
-                                <div class="sk-chase-dot"></div>
-                                <div class="sk-chase-dot"></div>
+    
+                                </table>
                             </div>
-                        </div>
+                            <div class="d-flex m-3 justify-content-center">
+                                <div class="sk-chase d-none" id="spinner">
+                                    <div class="sk-chase-dot"></div>
+                                    <div class="sk-chase-dot"></div>
+                                    <div class="sk-chase-dot"></div>
+                                    <div class="sk-chase-dot"></div>
+                                    <div class="sk-chase-dot"></div>
+                                    <div class="sk-chase-dot"></div>
+                                </div>
+                            </div>
+    
+                        </section>
 
-                        <div class="row justify-content-center">
-                            <div class="col-md-4 d-flex justify-content-center">
-                                <a href="index.html" class="btn btn-warning btn-block m-5 border border-dark">Seguir comprando</a>
+                        <section id="section-buttons">
+                            <div class="row justify-content-center">
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <a href="index.html" class="btn btn-warning btn-block m-5 border border-dark">Seguir comprando</a>
+                                </div>
+                                <div class="col-xs-12 col-md-4 d-flex justify-content-center">
+                                     <input type="submit" class="btn btn-success btn-block m-5 border border-dark" id="button" value="Finalizar compra" >
+                                </div>
                             </div>
-                            <div class="col-xs-12 col-md-4 d-flex justify-content-center">
-                                 <input type="submit" class="btn btn-success btn-block m-5 border border-dark" id="button" value="Finalizar compra" >
-                            </div>
-                        </div>
+    
+                        </section>
+
                     </form>
                 </div>
         </div>
