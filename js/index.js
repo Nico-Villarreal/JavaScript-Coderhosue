@@ -13,6 +13,7 @@ const containerCarrito = document.getElementById('container-Carrito');
 const divArticle = document.getElementById ('divArticle');
 const sitioConstruccion = document.querySelectorAll('#consturccion')
 
+
 let carrito = []
 
 //iniciando DOM en el proyecto
@@ -81,7 +82,6 @@ function pintarProductos(catalogo){
                       background: "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(91,91,91,1) 31%, rgba(154,154,154,1) 79%)",
                     },
                   }).showToast();
-
             })
         }) 
     }
@@ -100,9 +100,13 @@ const agregarCarrito = (prodId) => {
                 }
             })
         }else{
-
-            const item = catalogo.find((producto) => producto.id === prodId);
-            carrito.push(item);    
+            fetch(`./js/catalogo.json`)
+                .then(response => response.json())
+                .then ((data) => {
+                    const item = data.find((producto) => producto.id === prodId);
+                    carrito.push(item); 
+                    })
+   
         }
         actualizarCarrito();
 }
@@ -196,7 +200,34 @@ function guardarEnStorage (){
     localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
+
 function procesarCompra() {
+    fetch(`./js/catalogo.json`)
+    .then(response => response.json())
+    .then ((data) => {
+            carrito.forEach(datos => {
+            const listaCompra = document.querySelector("#tbody");
+            const {nombre, precio, img, cantidad } = datos;
+                const row = document.createElement("tr");
+                row.innerHTML += `
+                            <td>
+                            <img class="img-fluid w-25 border border-dark rounded-2" src="./img/${img}"/>
+                            </td>
+                            <td class="fw-semibold">${nombre}</td>
+                            <td class="fw-semibold">$ ${precio}</td>
+                            <td class="fw-semibold">${cantidad}</td>
+                            <td class="fw-semibold">$ ${precio * cantidad}</td>
+                            `;
+                listaCompra.appendChild(row);
+            });
+            totalProceso.innerText = carrito.reduce(
+            (acc, prod) => acc + prod.cantidad * prod.precio,
+            0
+            );
+    })
+}
+
+/*function procesarCompra() {
     carrito.forEach(datos => {
     const listaCompra = document.querySelector("#tbody");
     const {nombre, precio, img, cantidad } = datos;
@@ -216,4 +247,4 @@ function procesarCompra() {
     (acc, prod) => acc + prod.cantidad * prod.precio,
     0
     );
-}
+}*/
